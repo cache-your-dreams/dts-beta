@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * postcode service
+ * zip service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::postcode.postcode');
+module.exports = createCoreService('api::zip.zip');

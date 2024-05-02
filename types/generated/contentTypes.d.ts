@@ -14,6 +14,11 @@ export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
   attributes: {
     Name: Schema.Attribute.String;
     Description: Schema.Attribute.RichText;
+    zip: Schema.Attribute.Relation<'oneToOne', 'api::zip.zip'>;
+    DTSComponent: Schema.Attribute.Component<
+      'dts-components.dts-component',
+      true
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -25,18 +30,18 @@ export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPostcodePostcode extends Struct.SingleTypeSchema {
-  collectionName: 'postcodes';
+export interface ApiZipZip extends Struct.CollectionTypeSchema {
+  collectionName: 'zips';
   info: {
-    singularName: 'postcode';
-    pluralName: 'postcodes';
-    displayName: 'Postcode';
+    singularName: 'zip';
+    pluralName: 'zips';
+    displayName: 'Zip';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Postcode: Schema.Attribute.BigInteger;
+    Zip: Schema.Attribute.BigInteger & Schema.Attribute.Private;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -843,7 +848,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
       'api::address.address': ApiAddressAddress;
-      'api::postcode.postcode': ApiPostcodePostcode;
+      'api::zip.zip': ApiZipZip;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

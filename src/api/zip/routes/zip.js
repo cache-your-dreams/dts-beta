@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * postcode router
+ * zip router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::postcode.postcode');
+module.exports = createCoreRouter('api::zip.zip');

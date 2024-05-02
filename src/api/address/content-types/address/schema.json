@@ -17,6 +17,16 @@
     },
     "Description": {
       "type": "richtext"
+    },
+    "zip": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::zip.zip"
+    },
+    "DTSComponent": {
+      "type": "component",
+      "repeatable": true,
+      "component": "dts-components.dts-component"
     }
   }
 }

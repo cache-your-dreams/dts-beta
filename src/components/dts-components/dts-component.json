@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_dts_components_dts_components",
+  "info": {
+    "displayName": "DTS component",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10
+    },
+    "Description": {
+      "type": "richtext"
+    }
+  }
+}
