@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "years",
+  "info": {
+    "singularName": "year",
+    "pluralName": "years",
+    "displayName": "Year",
+    "description": ""
+  },
+  "options": {
+    "reviewWorkflows": false,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Year": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "date"
+    }
+  }
+}

@@ -27,6 +27,51 @@ export interface ApiAddressAddress extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
+    strapi_stage: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    strapi_assignee: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+  };
+}
+
+export interface ApiYearYear extends Struct.SingleTypeSchema {
+  collectionName: 'years';
+  info: {
+    singularName: 'year';
+    pluralName: 'years';
+    displayName: 'Year';
+    description: '';
+  };
+  options: {
+    reviewWorkflows: false;
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    Year: Schema.Attribute.Date &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    strapi_stage: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    strapi_assignee: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
   };
 }
 
@@ -50,6 +95,11 @@ export interface ApiZipZip extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
+    strapi_stage: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    strapi_assignee: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
   };
 }
 
@@ -495,6 +545,11 @@ export interface PluginUsersPermissionsUser
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
+    strapi_stage: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    strapi_assignee: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
   };
 }
 
@@ -844,10 +899,46 @@ export interface AdminTransferTokenPermission
   };
 }
 
+export interface AdminAuditLog extends Struct.CollectionTypeSchema {
+  collectionName: 'strapi_audit_logs';
+  info: {
+    singularName: 'audit-log';
+    pluralName: 'audit-logs';
+    displayName: 'Audit Log';
+  };
+  options: {
+    timestamps: false;
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    action: Schema.Attribute.String & Schema.Attribute.Required;
+    date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    payload: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
       'api::address.address': ApiAddressAddress;
+      'api::year.year': ApiYearYear;
       'api::zip.zip': ApiZipZip;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
@@ -866,6 +957,7 @@ declare module '@strapi/strapi' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'admin::audit-log': AdminAuditLog;
     }
   }
 }
